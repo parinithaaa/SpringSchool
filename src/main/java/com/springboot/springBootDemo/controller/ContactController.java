@@ -30,7 +30,6 @@ public class ContactController {
 	}
 	
 	private final ContactService con;
-	int counter;
 	
 	@Autowired
 	public ContactController(ContactService con) {
@@ -47,8 +46,6 @@ public class ContactController {
             return "contact.html";
         }
         con.saveMsgDetails(contact);
-        counter++;
-        log.info("counter value="+ counter);
         return "redirect:/contact";
     }
 
