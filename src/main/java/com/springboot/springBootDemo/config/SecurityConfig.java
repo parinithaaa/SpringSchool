@@ -26,7 +26,7 @@ public class SecurityConfig {
             .requestMatchers("/saveMsg").permitAll()
             .requestMatchers("/courses").permitAll()
             .requestMatchers("/about").permitAll()
-            .requestMatchers("/assets/**").permitAll()
+            .requestMatchers("/assets/**").permitAll() 
             .requestMatchers("/login").permitAll()
             .requestMatchers("/logout").permitAll())
         .formLogin(loginConfigurer -> loginConfigurer.loginPage("/login")
