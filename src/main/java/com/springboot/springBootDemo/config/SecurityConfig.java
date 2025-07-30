@@ -19,14 +19,13 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
         
-    	http.csrf((csrf) -> csrf.ignoringRequestMatchers("/saveMsg").ignoringRequestMatchers(PathRequest.toH2Console()))
+    	http.csrf((csrf) -> csrf.ignoringRequestMatchers("/saveMsg"))
         .authorizeHttpRequests((requests) -> requests.requestMatchers("/dashboard").authenticated()
             .requestMatchers("/", "/home").permitAll()
             .requestMatchers("/holidays/**").permitAll()
             .requestMatchers("/displayMessages").hasRole("ADMIN")
             .requestMatchers("/closeMsg").hasRole("ADMIN")
             .requestMatchers("/contact").permitAll()
-            .requestMatchers(PathRequest.toH2Console()).permitAll()
             .requestMatchers("/saveMsg").permitAll()
             .requestMatchers("/courses").permitAll()
             .requestMatchers("/about").permitAll()

@@ -28,4 +28,7 @@ public class ContactRowMapper implements RowMapper<Contact> {
         contact.setUpdatedBy(rs.getString("UPDATED_BY"));
         return contact;
     }
+    
+    
+    
 }
