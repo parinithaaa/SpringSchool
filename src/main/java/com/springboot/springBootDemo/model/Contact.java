@@ -1,5 +1,5 @@
 package com.springboot.springBootDemo.model;
-
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -7,9 +7,13 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
+@Entity
+@Table(name="contact_msg")
+
 public class Contact extends BaseEntity{
 	@NotBlank(message="Name must not be blank")
     @Size(min=3, message="Name must be at least 3 characters long")
+	@Id
 	String name;
 	
 	@NotBlank(message="Mobile number must not be blank")

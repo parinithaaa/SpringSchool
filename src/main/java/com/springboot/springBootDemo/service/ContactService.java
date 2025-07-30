@@ -1,7 +1,9 @@
 package com.springboot.springBootDemo.service;
 
 import java.time.LocalDateTime;
+
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,25 +27,30 @@ public class ContactService {
         contact.setStatus(Constants.OPEN);
         contact.setCreatedBy(Constants.ANONYMOUS);
         contact.setCreatedAt(LocalDateTime.now());
-        int result = contactRepository.saveContactMsg(contact);
-        if(result > 0) {
+        Contact contactt = contactRepository.save(contact);
+        if(null != contactt && contactt.getContactId()>0) {
             isSaved = true;
         }
         return isSaved;
     }
 	
 	public List<Contact> findMsgsWithOpenStatus(){
-        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(Constants.OPEN);
+        List<Contact> contactMsgs = contactRepository.findByStatus(Constants.OPEN);
         return contactMsgs;
     }
 	
-	public boolean updateMsgStatus(int contactId, String updatedBy){
-        boolean isUpdated = false;
-        int result = contactRepository.updateMsgStatus(contactId,Constants.CLOSE, updatedBy);
-        if(result>0) {
-            isUpdated = true;
-        }
-        return isUpdated;
-    }
+	public boolean updateMsgStatus(int contactId){
+	        boolean isUpdated = false;
+	        Optional<Contact> contact = contactRepository.findById(contactId);
+	        contact.ifPresent(contact1 -> {
+	            contact1.setStatus(Constants.CLOSE);
+	        });
+	        Contact updatedContact = contactRepository.save(contact.get());
+	        if(null != updatedContact && updatedContact.getUpdatedBy()!=null) {
+	            isUpdated = true;
+	        }
+	        return isUpdated;
+	    }
+
 
 }
