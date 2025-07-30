@@ -3,6 +3,7 @@ package com.springboot.springBootDemo.controller;
 import org.springframework.stereotype.Controller;
 
 
+
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,8 +19,12 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 @Slf4j
 @Controller
 public class ContactController {
@@ -48,6 +53,20 @@ public class ContactController {
         con.saveMsgDetails(contact);
         return "redirect:/contact";
     }
-
 	
+
+    @RequestMapping("/displayMessages")
+    public ModelAndView displayMessages(Model model) {
+        Object contactService;
+		List<Contact> contactMsgs = con.findMsgsWithOpenStatus();
+        ModelAndView modelAndView = new ModelAndView("messages.html");
+        modelAndView.addObject("contactMsgs",contactMsgs);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/closeMsg",method = GET)
+    public String closeMsg(@RequestParam int id, Authentication authentication) {
+        con.updateMsgStatus(id,authentication.getName());
+        return "redirect:/displayMessages";
+    }
 }

@@ -23,6 +23,8 @@ public class SecurityConfig {
         .authorizeHttpRequests((requests) -> requests.requestMatchers("/dashboard").authenticated()
             .requestMatchers("/", "/home").permitAll()
             .requestMatchers("/holidays/**").permitAll()
+            .requestMatchers("/displayMessages").hasRole("ADMIN")
+            .requestMatchers("/closeMsg").hasRole("ADMIN")
             .requestMatchers("/contact").permitAll()
             .requestMatchers(PathRequest.toH2Console()).permitAll()
             .requestMatchers("/saveMsg").permitAll()
@@ -56,7 +58,7 @@ return http.build();
         UserDetails admin = User.withDefaultPasswordEncoder()
                 .username("admin")
                 .password("54321")
-                .roles("USER", "ADMIN")
+                .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user, admin);
     }
