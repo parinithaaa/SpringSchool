@@ -41,7 +41,7 @@ public class ContactService {
 	
 	public boolean updateMsgStatus(int contactId){
 	        boolean isUpdated = false;
-	        Optional<Contact> contact = contactRepository.findById(contactId);
+	        Optional<Contact> contact = contactRepository.findByContactId(contactId);
 	        contact.ifPresent(contact1 -> {
 	            contact1.setStatus(Constants.CLOSE);
 	        });
