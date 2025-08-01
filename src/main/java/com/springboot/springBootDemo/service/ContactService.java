@@ -25,8 +25,6 @@ public class ContactService {
 	public boolean saveMsgDetails(Contact contact){
         boolean isSaved = false;
         contact.setStatus(Constants.OPEN);
-        contact.setCreatedBy(Constants.ANONYMOUS);
-        contact.setCreatedAt(LocalDateTime.now());
         Contact contactt = contactRepository.save(contact);
         if(null != contactt && contactt.getContactId()>0) {
             isSaved = true;
