@@ -22,7 +22,7 @@ public class LoginController {
                                    Model model) {
         String errorMessge = null;
         if (error != null) {
-            errorMessge = "Username or Password is incorrect !!";
+            errorMessge = "Username or Password is incorrect !!" + error;
         }
         else if (register != null) {
             errorMessge = "You registration successful. Login with registered credentials !!";

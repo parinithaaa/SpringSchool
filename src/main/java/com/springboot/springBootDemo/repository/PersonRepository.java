@@ -8,4 +8,8 @@ import com.springboot.springBootDemo.model.Person;
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Integer> {
 
+	Person readByName(String id);
+
+	
+
 }
