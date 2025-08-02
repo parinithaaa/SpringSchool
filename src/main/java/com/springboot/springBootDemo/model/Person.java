@@ -1,5 +1,8 @@
 package com.springboot.springBootDemo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.springboot.springBootDemo.annotations.FieldsValueMatch;
 import com.springboot.springBootDemo.annotations.PasswordValidator;
 
@@ -72,4 +75,11 @@ public class Person extends BaseEntity {
     @JoinColumn(name = "class_id", referencedColumnName = "classId", nullable = true)
     private SpringClass springClass;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinTable(name = "person_courses",
+            joinColumns = {
+                    @JoinColumn(name = "person_id", referencedColumnName = "personId")},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "course_id", referencedColumnName = "courseId")})
+    private Set<Courses> courses = new HashSet<>();
 }

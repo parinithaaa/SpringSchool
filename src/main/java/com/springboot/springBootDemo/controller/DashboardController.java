@@ -24,6 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 	        Person person = personRepository.readByName(authentication.getName());
 	        model.addAttribute("username", person.getName());
 	        model.addAttribute("roles", authentication.getAuthorities().toString());
+	        if(null != person.getSpringClass() && null != person.getSpringClass().getName()){
+	            model.addAttribute("enrolledClass", person.getSpringClass().getName());
+	        }
 	        session.setAttribute("loggedInPerson", person);
 	        return "dashboard.html";
 	    }

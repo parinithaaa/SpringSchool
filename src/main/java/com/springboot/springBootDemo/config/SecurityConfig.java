@@ -27,6 +27,7 @@ public class SecurityConfig {
             .requestMatchers("/holidays/**").permitAll()
             .requestMatchers("/displayMessages").hasRole("ADMIN")
             .requestMatchers("/admin/**").hasRole("ADMIN")
+            .requestMatchers("/student/**").hasRole("STUDENT")
             .requestMatchers("/displayProfile").permitAll()
             .requestMatchers("/updateProfile").permitAll()
             .requestMatchers("/closeMsg").hasRole("ADMIN")
