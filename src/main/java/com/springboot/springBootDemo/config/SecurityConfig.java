@@ -25,7 +25,7 @@ public class SecurityConfig {
         .authorizeHttpRequests((requests) -> requests.requestMatchers("/dashboard").authenticated()
             .requestMatchers("/", "/home").permitAll()
             .requestMatchers("/holidays/**").permitAll()
-            .requestMatchers("/displayMessages").hasRole("ADMIN")
+            .requestMatchers("/displayMessages/**").hasRole("ADMIN")
             .requestMatchers("/admin/**").hasRole("ADMIN")
             .requestMatchers("/student/**").hasRole("STUDENT")
             .requestMatchers("/displayProfile").permitAll()
