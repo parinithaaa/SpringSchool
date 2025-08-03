@@ -2,7 +2,6 @@ package com.springboot.springBootDemo.service;
 
 import java.time.LocalDateTime;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -44,13 +43,18 @@ public class ContactService {
 	}
 
 	public boolean updateMsgStatus(int contactId) {
+//		boolean isUpdated = false;
+//		Optional<Contact> contact = contactRepository.findByContactId(contactId);
+//		contact.ifPresent(contact1 -> {
+//			contact1.setStatus(Constants.CLOSE);
+//		});
+//		Contact updatedContact = contactRepository.save(contact.get());
+//		if (null != updatedContact && updatedContact.getUpdatedBy() != null) {
+//			isUpdated = true;
+//		}
 		boolean isUpdated = false;
-		Optional<Contact> contact = contactRepository.findByContactId(contactId);
-		contact.ifPresent(contact1 -> {
-			contact1.setStatus(Constants.CLOSE);
-		});
-		Contact updatedContact = contactRepository.save(contact.get());
-		if (null != updatedContact && updatedContact.getUpdatedBy() != null) {
+		int rows = contactRepository.updateMsgStatusNative(Constants.CLOSE, contactId);
+		if (rows > 0) {
 			isUpdated = true;
 		}
 		return isUpdated;

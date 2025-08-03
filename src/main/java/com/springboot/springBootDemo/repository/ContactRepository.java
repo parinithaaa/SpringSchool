@@ -43,4 +43,13 @@ public interface ContactRepository extends JpaRepository<Contact,Integer>{
 	    int updateStatusById(String status, int id);
 
 	    Page<Contact> findOpenMsgs(@Param("status") String status, Pageable pageable);
+	    
+	    @Query(nativeQuery = true)
+	    Page<Contact> findOpenMsgsNative(@Param("status") String status, Pageable pageable);
+
+	    @Transactional
+	    @Modifying
+	    @Query(nativeQuery = true)
+	    int updateMsgStatusNative(String status, int id);
+
 }
